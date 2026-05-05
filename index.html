@@ -29,30 +29,7 @@
     color: var(--white);
     font-family: 'Rajdhani', sans-serif;
     overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* CUSTOM CURSOR */
-  .cursor {
-    position: fixed;
-    width: 10px; height: 10px;
-    background: var(--cyan);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%,-50%);
-    transition: transform 0.1s;
-    box-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan);
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1px solid rgba(0,245,255,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%,-50%);
-    transition: all 0.15s ease;
+    cursor: auto;
   }
 
   ::-webkit-scrollbar { width: 3px; }
@@ -123,7 +100,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    cursor: none;
+    cursor: pointer;
     background: none;
     border: none;
     padding: 4px;
@@ -234,67 +211,67 @@
   /* PHOTO */
   .hero-photo-wrap {
     position: relative;
-    width: 230px; height: 230px;
-    margin-bottom: 36px;
+    width: 260px; height: 300px;
+    margin-bottom: 44px;
     z-index: 2;
   }
 
-  /* Halo glow behind photo */
+  /* Halo glow behind photo - larger circular halo */
   .photo-halo {
     position: absolute;
-    inset: -30px;
+    inset: -50px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,245,255,0.25) 0%, rgba(0,102,255,0.1) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,245,255,0.22) 0%, rgba(0,102,255,0.12) 35%, transparent 65%);
     animation: halo-breathe 3s ease-in-out infinite;
     z-index: -1;
   }
+  /* Outer soft gradient fade */
+  .photo-halo::after {
+    content: '';
+    position: absolute;
+    inset: -40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 40%, rgba(3,6,15,0.8) 80%, var(--bg) 100%);
+  }
   @keyframes halo-breathe {
     0%,100% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.15); opacity: 1; }
+    50% { transform: scale(1.12); opacity: 1; }
   }
 
-  /* Rotating border rings */
+  /* Rotating border rings - capsule/rounded */
   .photo-ring-1 {
     position: absolute;
-    inset: -8px;
-    border-radius: 24px;
-    border: 1px solid transparent;
+    inset: -10px;
+    border-radius: 40px;
+    border: 1.5px solid transparent;
     background: linear-gradient(var(--bg), var(--bg)) padding-box,
-                linear-gradient(135deg, var(--cyan), var(--blue), transparent, var(--cyan)) border-box;
+                linear-gradient(135deg, var(--cyan), var(--blue), transparent, var(--cyan2)) border-box;
     animation: rotate-ring 4s linear infinite;
+    box-shadow: 0 0 18px rgba(0,245,255,0.12);
   }
   .photo-ring-2 {
     position: absolute;
-    inset: -16px;
-    border-radius: 28px;
-    border: 1px solid rgba(0,245,255,0.2);
-    animation: rotate-ring 7s linear infinite reverse;
+    inset: -20px;
+    border-radius: 48px;
+    border: 1px solid rgba(0,245,255,0.15);
+    animation: rotate-ring 9s linear infinite reverse;
   }
   @keyframes rotate-ring {
     0% { filter: hue-rotate(0deg); }
     100% { filter: hue-rotate(360deg); }
   }
 
-  /* Corner brackets */
-  .photo-corner {
-    position: absolute;
-    width: 20px; height: 20px;
-    border-color: var(--cyan);
-    border-style: solid;
-  }
-  .photo-corner.tl { top: -4px; left: -4px; border-width: 2px 0 0 2px; }
-  .photo-corner.tr { top: -4px; right: -4px; border-width: 2px 2px 0 0; }
-  .photo-corner.bl { bottom: -4px; left: -4px; border-width: 0 0 2px 2px; }
-  .photo-corner.br { bottom: -4px; right: -4px; border-width: 0 2px 2px 0; }
+
 
   .hero-photo {
     width: 100%; height: 100%;
-    border-radius: 20px;
+    border-radius: 32px;
     object-fit: cover;
+    object-position: top center;
     display: block;
     position: relative;
     z-index: 1;
-    filter: drop-shadow(0 0 20px rgba(0,245,255,0.3));
+    filter: drop-shadow(0 0 24px rgba(0,245,255,0.35));
   }
 
   .cyber-badge {
@@ -370,58 +347,46 @@
   .typewriter-wrap::after { content: '_'; animation: blink 0.8s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
   .btn-primary {
-    background: transparent;
+    background: rgba(0,245,255,0.08);
     color: var(--cyan);
-    border: 1px solid var(--cyan);
-    padding: 13px 28px;
-    border-radius: 4px;
+    border: 1.5px solid var(--cyan);
+    padding: 13px 32px;
+    border-radius: 50px;
     font-family: 'Orbitron', monospace;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
-    cursor: none;
+    cursor: pointer;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(0,245,255,0.15), inset 0 0 15px rgba(0,245,255,0.03);
+    box-shadow: 0 0 18px rgba(0,245,255,0.15), inset 0 0 12px rgba(0,245,255,0.05);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
   }
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--cyan);
-    transform: translateX(-100%);
-    transition: transform 0.3s;
-    z-index: -1;
-  }
-  .btn-primary:hover { color: var(--bg); text-shadow: none; box-shadow: 0 0 30px rgba(0,245,255,0.5); }
-  .btn-primary:hover::before { transform: translateX(0); }
 
   .btn-outline {
-    background: transparent;
-    color: rgba(255,255,255,0.6);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 13px 28px;
-    border-radius: 4px;
+    background: rgba(255,255,255,0.03);
+    color: rgba(232,244,255,0.7);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    padding: 13px 32px;
+    border-radius: 50px;
     font-family: 'Orbitron', monospace;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
-    cursor: none;
+    cursor: pointer;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.3s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
   }
-  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 15px rgba(0,245,255,0.15); }
 
   /* SCAN LINE EFFECT */
   .hero::after {
@@ -582,7 +547,7 @@
     justify-content: center;
     text-decoration: none;
     transition: all 0.2s;
-    cursor: none;
+    cursor: pointer;
   }
   .social-btn:hover {
     background: rgba(0,245,255,0.15);
@@ -833,7 +798,7 @@
     text-decoration: none;
     color: var(--white);
     transition: all 0.2s;
-    cursor: none;
+    cursor: pointer;
   }
   .contact-item:hover { color: var(--cyan); }
 
@@ -894,36 +859,24 @@
 
   .btn-send {
     width: 100%;
-    background: transparent;
+    background: rgba(0,245,255,0.08);
     color: var(--cyan);
-    border: 1px solid var(--cyan);
+    border: 1.5px solid var(--cyan);
     padding: 14px;
-    border-radius: 4px;
+    border-radius: 50px;
     font-family: 'Orbitron', monospace;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 3px;
-    cursor: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
     box-shadow: 0 0 15px rgba(0,245,255,0.1);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
   }
-  .btn-send::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--cyan);
-    transform: translateX(-100%);
-    transition: transform 0.3s;
-    z-index: -1;
-  }
-  .btn-send:hover { color: var(--bg); box-shadow: 0 0 30px rgba(0,245,255,0.4); }
-  .btn-send:hover::before { transform: translateX(0); }
   .btn-send svg { width: 16px; height: 16px; fill: currentColor; }
 
   /* FOOTER */
@@ -958,7 +911,7 @@
     text-decoration: none;
     letter-spacing: 2px;
     transition: color 0.2s;
-    cursor: none;
+    cursor: pointer;
   }
   .footer-nav a:hover { color: var(--cyan); }
 
@@ -1003,8 +956,7 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+
 
 <!-- NAV -->
 <nav>
@@ -1044,11 +996,8 @@
       class="hero-photo"
       onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
     >
-    <div style="display:none; width:100%; height:100%; border-radius:20px; background:linear-gradient(145deg,#0a1628,#050d1e); align-items:center; justify-content:center; font-family:'Orbitron',monospace; font-size:60px; color:var(--cyan); text-shadow:0 0 30px var(--cyan);">AS</div>
-    <div class="photo-corner tl"></div>
-    <div class="photo-corner tr"></div>
-    <div class="photo-corner bl"></div>
-    <div class="photo-corner br"></div>
+    <div style="display:none; width:100%; height:100%; border-radius:32px; background:linear-gradient(145deg,#0a1628,#050d1e); align-items:center; justify-content:center; font-family:'Orbitron',monospace; font-size:60px; color:var(--cyan); text-shadow:0 0 30px var(--cyan);">AS</div>
+
     <div class="cyber-badge">ONLINE — AVAILABLE FOR WORK</div>
   </div>
 
@@ -1351,18 +1300,6 @@
 </footer>
 
 <script>
-  // CURSOR
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    setTimeout(() => {
-      ring.style.left = e.clientX + 'px';
-      ring.style.top = e.clientY + 'px';
-    }, 80);
-  });
-
   // MENU
   function toggleMenu() {
     document.getElementById('hamburger').classList.toggle('open');
